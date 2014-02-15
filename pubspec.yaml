@@ -1,7 +1,7 @@
 name: bot_io
-version: 0.25.3
+version: 0.25.3+1-dev
 author: Kevin Moore <github@j832.com>
-description: A collection of (mostly) general libraries to make working with Dart more productive.
+description: A collection of Dart file system helpers built on dart:io
 homepage: https://github.com/kevmoo/bot_io.dart
 environment:
   sdk: '>=1.0.0 <2.0.0'
