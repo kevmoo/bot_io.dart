@@ -1,6 +1,11 @@
 # Changelog - bot_io
 
-## 0.25.2 (SDK 1.2.0-dev.5.7 32688)
+## 0.25.3 2014-02-15 (SDK 1.2.0-dev.5.7 32688)
+
+* **completion.dart** is **DEPRECATED**. Use the `completion` package instead.
+    * See [github.com/kevmoo/completion.dart](https://github.com/kevmoo/completion.dart)
+
+## 0.25.2 2014-02-15 (SDK 1.2.0-dev.5.7 32688)
 
 * **bot_git** is **DEPRECATED**. Use the `git` package instead.
 
