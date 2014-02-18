@@ -24,17 +24,9 @@ Future<String> fileSha1Hex(File file) =>
   _getFileSha1(file).then(crypto.CryptoUtils.bytesToHex);
 
 Future<List<int>> _getFileSha1(File source) {
-  final completer = new Completer<List<int>>();
+  var sha1 = new crypto.SHA1();
 
-  final sha1 = new crypto.SHA1();
-
-  source.openRead()
-    .listen((List<int> data) {
-      sha1.add(data);
-    },
-    onDone: () {
-      completer.complete(sha1.close());
-    });
-
-  return completer.future;
+  return source.openRead().forEach((list) {
+    sha1.add(list);
+  }).then((_) => sha1.close());
 }
