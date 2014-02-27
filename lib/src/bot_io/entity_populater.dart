@@ -6,14 +6,14 @@ abstract class EntityPopulater {
       {bool createParentDirectories: false, bool overwriteExisting: false,
     bool leaveExistingDirs: false}) {
 
-    if(source is String) {
+    if (source is String) {
       var stringStream = new Stream.fromIterable([source]);
       source = UTF8.encoder.bind(stringStream);
-    } else if(source is File) {
+    } else if (source is File) {
       source = source.openRead();
     }
 
-    if(source is Stream) {
+    if (source is Stream) {
       return _ensurePath(path, createParentDirectories: createParentDirectories,
           overwriteExisting: overwriteExisting,
           leaveExistingDir: leaveExistingDirs)

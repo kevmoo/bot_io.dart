@@ -5,7 +5,7 @@ abstract class ShellString {
 
   factory ShellString(Object value) {
     value = _convert(value);
-    if(value is ShellString) {
+    if (value is ShellString) {
       return value;
     } else {
       assert(value is String);
@@ -31,9 +31,9 @@ abstract class ShellString {
         .map((v) => ShellString._convert(v))
         .toList();
 
-    if(vals.isEmpty) {
+    if (vals.isEmpty) {
       return new ShellString('');
-    } else if(values.length == 1) {
+    } else if (values.length == 1) {
       return new ShellString(values.single);
     } else {
       return new _ListShellString(vals);
@@ -42,9 +42,9 @@ abstract class ShellString {
 
   static Object _convert(Object value) {
     requireArgumentNotNull(value, 'value');
-    if(value is ShellString) {
+    if (value is ShellString) {
       return value;
-    } else if(value is String) {
+    } else if (value is String) {
       return value;
     } else {
       return value.toString();
@@ -54,7 +54,7 @@ abstract class ShellString {
 
 class _SimpleShellString extends ShellString {
   final String value;
-  _SimpleShellString(this.value) : super._internal() {
+  _SimpleShellString(this.value): super._internal() {
     assert(value != null);
   }
 
@@ -65,7 +65,7 @@ class _SimpleShellString extends ShellString {
 class _ColorShellString extends _SimpleShellString {
   final AnsiColor color;
 
-  _ColorShellString(String value, this.color) : super(value) {
+  _ColorShellString(String value, this.color): super(value) {
     assert(color != null);
   }
 
@@ -98,10 +98,10 @@ class _ListShellString extends ShellString {
   }
 
   void _toBuffer(StringBuffer buffer, bool useColor) {
-    for(final v in values) {
-      if(v is _ListShellString) {
+    for (final v in values) {
+      if (v is _ListShellString) {
         v._toBuffer(buffer, useColor);
-      } else if(v is ShellString) {
+      } else if (v is ShellString) {
         buffer.write(v.format(useColor));
       } else {
         buffer.write(v);

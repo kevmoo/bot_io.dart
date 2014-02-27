@@ -39,11 +39,10 @@ abstract class EntityValidator {
 
     return expandStream(dir.list(), (FileSystemEntity item) {
 
-      final relative = pathos.relative(item.path,
-          from: entity.path);
+      final relative = pathos.relative(item.path, from: entity.path);
 
       final expected = expectedItems.remove(relative);
-      if(expected) {
+      if (expected) {
         return validate(item, map[relative]);
       } else {
         return new Stream.fromIterable(['Not expected: $item']);
@@ -51,17 +50,17 @@ abstract class EntityValidator {
 
     }, onDone: () {
       return new Stream.fromIterable(expectedItems.map((item) {
-          return 'Missing item $item';
-        }));
+        return 'Missing item $item';
+      }));
     });
   }
 
   static Stream<String> validate(FileSystemEntity entity, dynamic target) {
-    if(target is EntityValidator) {
+    if (target is EntityValidator) {
       return target.validateEntity(entity);
-    } else if(target is String) {
+    } else if (target is String) {
       return validateFileStringContent(entity, target);
-    } else if(target is Map) {
+    } else if (target is Map) {
       return validateDirectoryFromMap(entity, target);
     } else {
       throw new ArgumentError("Don't know how to deal with $target");
@@ -103,11 +102,11 @@ class EntityExistsValidator implements EntityValidator {
   }
 
   static Future<bool> _exists(FileSystemEntity entity) {
-    if(entity is Directory) {
+    if (entity is Directory) {
       return entity.exists();
-    } else if(entity is File) {
+    } else if (entity is File) {
       return entity.exists();
-    } else if(entity is Link) {
+    } else if (entity is Link) {
       return entity.exists();
     }
     throw new ArgumentError('entity $entity is not supported');
@@ -115,9 +114,9 @@ class EntityExistsValidator implements EntityValidator {
 
   static FileSystemEntityType _getType(FileSystemEntity entity) {
     assert(entity != null);
-    if(entity is File) {
+    if (entity is File) {
       return FileSystemEntityType.FILE;
-    } else if(entity is Directory) {
+    } else if (entity is Directory) {
       return FileSystemEntityType.DIRECTORY;
     } else {
       assert(entity is Link);

@@ -8,22 +8,26 @@ import 'package:bot_io/bot_io.dart';
 void main() {
 
   var m1 = {
-            'foo':'foo',
-            'bar':'foo',
-            'sub': 'not a dir'
+    'foo': 'foo',
+    'bar': 'foo',
+    'sub': 'not a dir'
   };
 
   var m2 = {
-            'bar': 'bar',
-            'baz': 'baz',
-            'sub': { 'sub':'sub'}
+    'bar': 'bar',
+    'baz': 'baz',
+    'sub': {
+      'sub': 'sub'
+    }
   };
 
   var m3 = {
-            'foo': 'foo',
-            'bar': 'bar',
-            'baz': 'baz',
-            'sub': {'sub':'sub' }
+    'foo': 'foo',
+    'bar': 'bar',
+    'baz': 'baz',
+    'sub': {
+      'sub': 'sub'
+    }
   };
 
   test("merge map internal", () {
@@ -98,17 +102,17 @@ Map _mergeMaps(Map m1, [Map m2 = null]) {
   var map = {};
 
   var m1onlyKeys = m1Keys.difference(m2Keys);
-  for(var k in m1onlyKeys) {
+  for (var k in m1onlyKeys) {
     var v = m1[k];
-    if(v is Map) {
+    if (v is Map) {
       v = _mergeMaps(v);
     }
     map[k] = v;
   }
 
-  for(var k in m2Keys) {
+  for (var k in m2Keys) {
     var v = m2[k];
-    if(v is Map) {
+    if (v is Map) {
       v = _mergeMaps(v);
     }
     map[k] = v;

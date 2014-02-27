@@ -33,7 +33,7 @@ part 'src/bot_io/temp_dir.dart';
  * The format: [LogRecord.time] 'tab' [LogRecord.level] 'tab' [LogRecord.loggerName] 'tab' [LogRecord.message]
  */
 void enableScriptLogListener() {
-  if(_scriptLogListenerPath == null) {
+  if (_scriptLogListenerPath == null) {
 
     final script = Platform.script.toFilePath();
     _scriptLogListenerPath = pathos.absolute(script) + '.log';
@@ -53,9 +53,9 @@ String _scriptLogListenerPath;
 
 void _doLog(logging.LogRecord record) {
 
-  final msg = '${record.time}\t${record.level}\t${record.loggerName}\t${record.message}';
+  var msg = '${record.time}\t${record.level}\t${record.loggerName}\t${record.message}';
 
-  final logFile = new File(_scriptLogListenerPath);
+  var logFile = new File(_scriptLogListenerPath);
 
   logFile.writeAsStringSync('$msg\n', mode: FileMode.APPEND);
 }

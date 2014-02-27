@@ -9,30 +9,41 @@ import 'package:bot_io/bot_io.dart';
 
 
 final _map = {
-   'file1.txt': 'content',
-   'file2.txt': 'content2',
-   'empty dir': { },
-   'dir1': {'dir1_file1.txt': 'and content some more'} };
+  'file1.txt': 'content',
+  'file2.txt': 'content2',
+  'empty dir': {},
+  'dir1': {
+    'dir1_file1.txt': 'and content some more'
+  }
+};
 
 final _mapFewer = {
- 'file1.txt': 'content',
- 'empty dir': { },
- 'dir1': {'dir1_file1.txt': 'and content some more'}
- };
+  'file1.txt': 'content',
+  'empty dir': {},
+  'dir1': {
+    'dir1_file1.txt': 'and content some more'
+  }
+};
 
 final _mapMore = {
-    'file1.txt': 'content',
-    'file2.txt': 'content2',
-    'empty dir': { 'file3.txt': 'content3' },
-     'dir1': { 'dir1_file1.txt': 'and content some more'}
-    };
+  'file1.txt': 'content',
+  'file2.txt': 'content2',
+  'empty dir': {
+    'file3.txt': 'content3'
+  },
+  'dir1': {
+    'dir1_file1.txt': 'and content some more'
+  }
+};
 
 final _mapDiff = {
-    'file1.txt': 'content_',
-    'file2.txt': 'content2',
-    'empty dir': { },
-    'dir1': { 'dir1_file1.txt': 'and content some more'}
-    };
+  'file1.txt': 'content_',
+  'file2.txt': 'content2',
+  'empty dir': {},
+  'dir1': {
+    'dir1_file1.txt': 'and content some more'
+  }
+};
 
 void main() {
   test('good match', () => _testTempDirPopulate(_map, _map, true));

@@ -35,9 +35,9 @@ class Console {
     final cells = new Array2d<String>(columns.length, source.length + headerInclude);
     final maxWidths = new List<int>.filled(columns.length, 0);
 
-    if(includeHeader) {
+    if (includeHeader) {
       // populate header first
-      for(var i = 0; i < columns.length; i++) {
+      for (var i = 0; i < columns.length; i++) {
         final value = columns[i].name;
         maxWidths[i] = math.max(maxWidths[i], value.length);
         cells.set(i, 0, value);
@@ -46,7 +46,7 @@ class Console {
 
     $(source).forEachWithIndex((item, i) {
       final rowIndex = i + headerInclude;
-      for(var col = 0; col < columns.length; col++) {
+      for (var col = 0; col < columns.length; col++) {
         final column = columns[col];
         final value = column._mapper(item).trim();
         maxWidths[col] = math.max(maxWidths[col], value.length);
@@ -64,12 +64,12 @@ class Console {
     final buffer = new StringBuffer();
     int targetWidth = 0;
 
-    for(var i = 0; i < row.length; i++) {
+    for (var i = 0; i < row.length; i++) {
       final value = row[i];
       final width = columnWidths[i];
       assert(value.length <= width);
 
-      while(buffer.length < targetWidth) {
+      while (buffer.length < targetWidth) {
         buffer.write(' ');
       }
       buffer.write(value);

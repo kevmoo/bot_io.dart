@@ -7,13 +7,12 @@ import 'package:path/path.dart' as pathos;
 import 'package:bot_io/bot_io.dart';
 
 const _entityTypes = const [null, FileSystemEntityType.FILE,
-                            FileSystemEntityType.DIRECTORY,
-                            FileSystemEntityType.LINK];
+    FileSystemEntityType.DIRECTORY, FileSystemEntityType.LINK];
 
 const _dirMap = const {
   'file.txt': 'content text',
   'file2.txt': 'content 2 text',
-  'dir1' : const {
+  'dir1': const {
     'subfile': 'subFileContent',
     'emptySubSubDir': const {}
   },
@@ -91,8 +90,8 @@ Future _testEntityPopulator(FileSystemEntityType entityType,
     var absolutePath = pathos.join(dir.path, entityRelativePath);
 
     return new Future(() {
-      if(existingEntityType != null) {
-        switch(existingEntityType) {
+      if (existingEntityType != null) {
+        switch (existingEntityType) {
           case FileSystemEntityType.FILE:
             var existing = new File(absolutePath);
             return existing.writeAsString('existing content');

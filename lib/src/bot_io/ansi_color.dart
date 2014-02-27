@@ -26,7 +26,7 @@ class AnsiColor {
     this._srg = srg;
 
   AnsiColor asBold() {
-    if(isBold) {
+    if (isBold) {
       return this;
     } else {
       return new AnsiColor._internal(foregroundId, name, srg: 1);
@@ -36,7 +36,7 @@ class AnsiColor {
   String toString() {
     final value = 'AnsiColor: $name';
 
-    if(isBold) {
+    if (isBold) {
       return value + ' (BOLD)';
     } else {
       return value;
@@ -54,7 +54,7 @@ class AnsiColor {
 
     items.add(_srg.toString());
 
-    if(foregroundId != null) {
+    if (foregroundId != null) {
       items.add('3$foregroundId');
     }
 

@@ -1,4 +1,3 @@
-
 @deprecated
 library bot_git;
 
