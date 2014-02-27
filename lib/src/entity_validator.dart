@@ -10,6 +10,10 @@ import 'package:path/path.dart' as p;
 
 import 'sha_and_comparison.dart';
 
+///
+/// Deprecating in favor of the descriptor library in the scheduled_test package.
+///
+@deprecated
 abstract class EntityValidator {
   static Stream<String> validateFileStringContent(
       File entity, String targetContent) {
@@ -76,6 +80,11 @@ abstract class EntityValidator {
   Stream<String> validateEntity(FileSystemEntity entity);
 }
 
+///
+/// Deprecating in favor of the descriptor library in the scheduled_test
+/// package.
+///
+@deprecated
 class EntityExistsValidator implements EntityValidator {
   final FileSystemEntityType entityType;
 
