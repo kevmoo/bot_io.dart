@@ -5,17 +5,10 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:io';
 
+import 'package:bot/bot.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:logging/logging.dart' as logging;
 import 'package:path/path.dart' as pathos;
-
-import 'package:bot/bot.dart';
-
-/**
- * **DEPRECATED**. Import this directly from the `bot` package.
- */
-@deprecated
-export 'package:bot/bot.dart' show expandStream;
 
 part 'src/bot_io/ansi_color.dart';
 part 'src/bot_io/console.dart';
