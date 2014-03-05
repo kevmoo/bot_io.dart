@@ -9,6 +9,7 @@ import 'package:path/path.dart' as p;
 import 'entity_populater.dart';
 import 'io_helpers.dart';
 
+@deprecated
 class TempDir {
   final Directory dir;
 
@@ -54,6 +55,7 @@ class TempDir {
 
   bool get isDisposed => _disposed;
 
+  @deprecated
   Future<TempDir> populate(source) {
     return EntityPopulater
         .populate(path, source,
@@ -66,10 +68,12 @@ class TempDir {
     });
   }
 
+  @deprecated
   Future<bool> verifyContents(Map<String, dynamic> content) {
     return IoHelpers.verifyContents(dir, content);
   }
 
+  @deprecated
   Future<bool> isEmpty() {
     return IoHelpers.isEmpty(dir);
   }
