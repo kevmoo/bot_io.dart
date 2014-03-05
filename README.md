@@ -1,4 +1,4 @@
-![BOT!](https://raw.github.com/kevmoo/bot_io.dart/master/resource/logo.png)
+![BOT!](https://raw.github.com/kevmoo/bot.dart/master/resource/logo.png)
 # bot_io
 ### A collection of Dart file system helpers built on dart:io.
 
