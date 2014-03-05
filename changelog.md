@@ -1,5 +1,12 @@
 # Changelog - bot_io
 
+## 0.26.0 2014-03-05
+
+* **BREAKING** removed deprecated `completion.dart` library. See the `completion` package.
+* **BREAKING** removed deprecated `bot_git.dart` library. See the `git` package.
+* **BREAKING** removed deprecated `expandStream` from `bot_io`. Now in `bot` package.
+* Lots of other cleanup.
+
 ## 0.25.3 2014-02-15 (SDK 1.2.0-dev.5.7 32688)
 
 * **completion.dart** is **DEPRECATED**. Use the `completion` package instead.

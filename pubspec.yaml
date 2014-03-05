@@ -1,5 +1,5 @@
 name: bot_io
-version: 0.26.0-dev
+version: 0.26.0
 author: Kevin Moore <github@j832.com>
 description: A collection of Dart file system helpers built on dart:io
 homepage: https://github.com/kevmoo/bot_io.dart
