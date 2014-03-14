@@ -3,7 +3,7 @@ library bot_io.log_listener;
 import 'dart:io';
 
 import 'package:logging/logging.dart' as logging;
-import 'package:path/path.dart' as pathos;
+import 'package:path/path.dart' as p;
 
 /**
  * When called, a listener is added to the root [Logger] and all output is
@@ -15,7 +15,7 @@ void enableScriptLogListener() {
   if (_scriptLogListenerPath == null) {
 
     final script = Platform.script.toFilePath();
-    _scriptLogListenerPath = pathos.absolute(script) + '.log';
+    _scriptLogListenerPath = p.absolute(script) + '.log';
 
     final rootLogger = logging.Logger.root;
     rootLogger.level = logging.Level.ALL;

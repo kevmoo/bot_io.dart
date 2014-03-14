@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bot/bot.dart';
-import 'package:path/path.dart' as pathos;
+import 'package:path/path.dart' as p;
 
 import 'entity_populater.dart';
 import 'io_helpers.dart';
@@ -48,7 +48,7 @@ class TempDir {
   TempDir._internal(this.dir) {
     assert(this.dir != null);
     assert(this.dir.existsSync());
-    assert(pathos.isAbsolute(this.dir.path));
+    assert(p.isAbsolute(this.dir.path));
   }
 
   String get path => dir.path;

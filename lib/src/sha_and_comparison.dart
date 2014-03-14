@@ -3,7 +3,7 @@ library bot_io.sha_and_comparison;
 import 'dart:async';
 import 'dart:io';
 
-import 'package:crypto/crypto.dart' as crypto;
+import 'package:crypto/crypto.dart';
 
 /**
  * Returns a [Future] that evaluates to true if the contents of [file1] and
@@ -26,10 +26,10 @@ Future<bool> fileContentsMatch(File file1, File file2) {
  * If [file] is null or does not exist, errors will occur.
  */
 Future<String> fileSha1Hex(File file) =>
-  _getFileSha1(file).then(crypto.CryptoUtils.bytesToHex);
+  _getFileSha1(file).then(CryptoUtils.bytesToHex);
 
 Future<List<int>> _getFileSha1(File source) {
-  var sha1 = new crypto.SHA1();
+  var sha1 = new SHA1();
 
   return source.openRead().forEach((list) {
     sha1.add(list);

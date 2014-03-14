@@ -6,7 +6,7 @@ import 'dart:io';
 
 import 'package:bot/bot.dart';
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:path/path.dart' as pathos;
+import 'package:path/path.dart' as p;
 
 import 'sha_and_comparison.dart';
 
@@ -49,7 +49,7 @@ abstract class EntityValidator {
 
     return expandStream(dir.list(), (FileSystemEntity item) {
 
-      final relative = pathos.relative(item.path, from: entity.path);
+      final relative = p.relative(item.path, from: entity.path);
 
       final expected = expectedItems.remove(relative);
       if (expected) {

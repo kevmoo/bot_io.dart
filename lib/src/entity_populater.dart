@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:path/path.dart' as pathos;
+import 'package:path/path.dart' as p;
 
 abstract class EntityPopulater {
 
@@ -80,7 +80,7 @@ abstract class EntityPopulater {
           return Future.forEach(content.keys, (String entityName) {
             // TODO: assert entityName has no path characters, right?
 
-            var entityPath = pathos.join(path, entityName);
+            var entityPath = p.join(path, entityName);
             return populate(entityPath, content[entityName],
                 overwriteExisting: overwriteExisting,
                 leaveExistingDirs: leaveExistingDir);
@@ -94,7 +94,7 @@ abstract class EntityPopulater {
       {bool createParentDirectories: false, bool overwriteExisting: false,
     bool leaveExistingDir: false}) {
 
-    final dirName = pathos.dirname(path);
+    final dirName = p.dirname(path);
     var parentDir = new Directory(dirName);
     return parentDir.exists()
         .then((bool parentDirExists) {
