@@ -4,17 +4,17 @@ library bot_io.ansi_color;
  * [More details](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)
  */
 class AnsiColor {
-  static const AnsiColor BLACK = const AnsiColor._internal(0, 'black');
-  static const AnsiColor RED = const AnsiColor._internal(1, 'red');
-  static const AnsiColor GREEN = const AnsiColor._internal(2, 'green');
-  static const AnsiColor YELLOW = const AnsiColor._internal(3, 'yellow');
-  static const AnsiColor BLUE = const AnsiColor._internal(4, 'blue');
-  static const AnsiColor MAGENTA = const AnsiColor._internal(5, 'magenta');
-  static const AnsiColor CYAN = const AnsiColor._internal(6, 'cyan');
-  static const AnsiColor GRAY = const AnsiColor._internal(7, 'gray');
-  static const AnsiColor LIGHT_RED = const AnsiColor._internal(91, 'light red');
-  static const AnsiColor BOLD = const AnsiColor._internal(null, 'bold', srg: 1);
-  static const AnsiColor RESET = const AnsiColor._internal(null, 'reset');
+  static const AnsiColor BLACK = const AnsiColor._(0, 'black');
+  static const AnsiColor RED = const AnsiColor._(1, 'red');
+  static const AnsiColor GREEN = const AnsiColor._(2, 'green');
+  static const AnsiColor YELLOW = const AnsiColor._(3, 'yellow');
+  static const AnsiColor BLUE = const AnsiColor._(4, 'blue');
+  static const AnsiColor MAGENTA = const AnsiColor._(5, 'magenta');
+  static const AnsiColor CYAN = const AnsiColor._(6, 'cyan');
+  static const AnsiColor GRAY = const AnsiColor._(7, 'gray');
+  static const AnsiColor LIGHT_RED = const AnsiColor._(91, 'light red');
+  static const AnsiColor BOLD = const AnsiColor._(null, 'bold', srg: 1);
+  static const AnsiColor RESET = const AnsiColor._(null, 'reset');
 
   final int foregroundId;
   final String name;
@@ -22,14 +22,14 @@ class AnsiColor {
 
   bool get isBold => _srg == 1;
 
-  const AnsiColor._internal(this.foregroundId, this.name, {int srg: 0}) :
+  const AnsiColor._(this.foregroundId, this.name, {int srg: 0}) :
     this._srg = srg;
 
   AnsiColor asBold() {
     if (isBold) {
       return this;
     } else {
-      return new AnsiColor._internal(foregroundId, name, srg: 1);
+      return new AnsiColor._(foregroundId, name, srg: 1);
     }
   }
 
