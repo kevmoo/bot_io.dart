@@ -1,4 +1,9 @@
-part of bot_io;
+library bot_io.io_helpers;
+
+import 'dart:async';
+import 'dart:io';
+
+import 'entity_validator.dart';
 
 class IoHelpers {
 

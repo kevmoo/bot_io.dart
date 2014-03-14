@@ -1,4 +1,10 @@
-part of bot_io;
+library bot_io.entity_populater;
+
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:path/path.dart' as pathos;
 
 abstract class EntityPopulater {
 

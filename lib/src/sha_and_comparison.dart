@@ -1,4 +1,9 @@
-part of bot_io;
+library bot_io.sha_and_comparison;
+
+import 'dart:async';
+import 'dart:io';
+
+import 'package:crypto/crypto.dart' as crypto;
 
 /**
  * Returns a [Future] that evaluates to true if the contents of [file1] and

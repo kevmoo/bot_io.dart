@@ -1,4 +1,8 @@
-part of bot_io;
+library bot_io.shell_string;
+
+import 'package:bot/bot.dart';
+
+import 'ansi_color.dart';
 
 abstract class ShellString {
   ShellString._internal();

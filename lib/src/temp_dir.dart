@@ -1,4 +1,13 @@
-part of bot_io;
+library bot_io.temp_dir;
+
+import 'dart:async';
+import 'dart:io';
+
+import 'package:bot/bot.dart';
+import 'package:path/path.dart' as pathos;
+
+import 'entity_populater.dart';
+import 'io_helpers.dart';
 
 class TempDir {
   final Directory dir;

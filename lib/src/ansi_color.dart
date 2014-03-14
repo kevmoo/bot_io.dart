@@ -1,4 +1,4 @@
-part of bot_io;
+library bot_io.ansi_color;
 
 /**
  * [More details](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)

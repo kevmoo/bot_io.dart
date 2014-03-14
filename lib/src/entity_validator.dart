@@ -1,4 +1,14 @@
-part of bot_io;
+library bot_io.entity_validator;
+
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:bot/bot.dart';
+import 'package:crypto/crypto.dart' as crypto;
+import 'package:path/path.dart' as pathos;
+
+import 'sha_and_comparison.dart';
 
 abstract class EntityValidator {
 

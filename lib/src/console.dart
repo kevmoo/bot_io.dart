@@ -1,4 +1,8 @@
-part of bot_io;
+library bot_io.console;
+
+import 'dart:io';
+import 'dart:math' as math;
+import 'package:bot/bot.dart';
 
 // TODO: rename this Shell? Hmm...
 
