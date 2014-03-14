@@ -1,5 +1,7 @@
 library bot_io.ansi_color;
 
+import 'dart:io';
+
 /**
  * [More details](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)
  */
@@ -21,6 +23,11 @@ class AnsiColor {
   final int _srg;
 
   bool get isBold => _srg == 1;
+
+  /// Returns `true` if the current platform is not Windows and if the type
+  /// of [stdout] is [StdioType.TERMINAL].
+  static final bool isSupported = !Platform.isWindows &&
+      stdioType(stdout) == StdioType.TERMINAL;
 
   const AnsiColor._(this.foregroundId, this.name, {int srg: 0}) :
     this._srg = srg;

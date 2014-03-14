@@ -1,26 +1,16 @@
 library bot_io.console;
 
-import 'dart:io';
 import 'dart:math' as math;
 import 'package:bot/bot.dart';
 
-// TODO: rename this Shell? Hmm...
+import 'ansi_color.dart';
 
 class Console {
 
-  /**
-   * `true` if it is valid to include [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code)
-   * entities in values sent to standard output (usually via [print]).
-   *
-   * At the moment, this is just a check to see if the `CLICOLOR` value is set
-   * in [Platform.environment].
-   *
-   * Other methods might include checking the value of the `TERM` environment
-   * variable or the output of `tput colors` in bash.
-   *
-   * Open to feedback and suggestions here.
-   */
-  static bool get supportsColor => Platform.environment.containsKey('CLICOLOR');
+  /// **DEPRECATED**
+  ///
+  /// Use [AnsiColor.isSupported] instead.
+  static bool get supportsColor => AnsiColor.isSupported;
 
   static Iterable<String> getTable(Iterable source,
       List<ColumnDefinition> columns, {bool includeHeader: false}) {
