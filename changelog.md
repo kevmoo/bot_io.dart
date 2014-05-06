@@ -1,4 +1,7 @@
-# Changelog - bot_io
+## 0.26.1 2014-05-06
+
+* **NEW!** Added `AnsiColor.isSupported`
+* **DEPRECATED** `Console.supportsColor` use `AnsiColor.isSupported` instead.
 
 ## 0.26.0 2014-03-05
 
