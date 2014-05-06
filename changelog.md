@@ -1,4 +1,4 @@
-## 0.26.1+1 2014-05-06
+## 0.26.1+2 2014-05-06
 
 * Mark `Console.supportsColor` with `@deprecated`.
 
