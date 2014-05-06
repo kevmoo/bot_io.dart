@@ -1,3 +1,7 @@
+## 0.26.1+1 2014-05-06
+
+* Mark `Console.supportsColor` with `@deprecated`.
+
 ## 0.26.1 2014-05-06
 
 * **NEW!** Added `AnsiColor.isSupported`

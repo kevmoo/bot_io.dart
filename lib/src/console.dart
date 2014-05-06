@@ -10,6 +10,7 @@ class Console {
   /// **DEPRECATED**
   ///
   /// Use [AnsiColor.isSupported] instead.
+  @depreacted
   static bool get supportsColor => AnsiColor.isSupported;
 
   static Iterable<String> getTable(Iterable source,
