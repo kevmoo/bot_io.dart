@@ -1,3 +1,8 @@
+## 0.26.2 2014-05-06
+
+* Upgrade min dependency on `bot` to `0.27.0`.
+* Stop using deprecated features from `bot`.
+
 ## 0.26.1+2 2014-05-06
 
 * Mark `Console.supportsColor` with `@deprecated`.
