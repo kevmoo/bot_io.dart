@@ -1,3 +1,7 @@
+## 0.26.3+1
+
+* Updated `hop` and added `hop_unittest` dev dependencies.
+
 ## 0.26.3
 
 * Added `copyDirectory`
