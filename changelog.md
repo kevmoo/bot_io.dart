@@ -1,3 +1,7 @@
+## 0.26.3
+
+* Added `copyDirectory`
+
 ## 0.26.2 2014-05-06
 
 * Upgrade min dependency on `bot` to `0.27.0`.
