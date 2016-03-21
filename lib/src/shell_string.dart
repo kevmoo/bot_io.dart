@@ -31,7 +31,8 @@ abstract class ShellString {
   String toString() => format(false);
 
   static ShellString _join(Iterable values) {
-    final vals = values.where((v) => v != null && v != '')
+    final vals = values
+        .where((v) => v != null && v != '')
         .map((v) => ShellString._convert(v))
         .toList();
 
@@ -58,7 +59,7 @@ abstract class ShellString {
 
 class _SimpleShellString extends ShellString {
   final String value;
-  _SimpleShellString(this.value): super._internal() {
+  _SimpleShellString(this.value) : super._internal() {
     assert(value != null);
   }
 
@@ -69,7 +70,7 @@ class _SimpleShellString extends ShellString {
 class _ColorShellString extends _SimpleShellString {
   final AnsiColor color;
 
-  _ColorShellString(String value, this.color): super(value) {
+  _ColorShellString(String value, this.color) : super(value) {
     assert(color != null);
   }
 
@@ -80,8 +81,8 @@ class _ColorShellString extends _SimpleShellString {
 class _ColorShellStringWithAlt extends _ColorShellString {
   final String alt;
 
-  _ColorShellStringWithAlt(String value, AnsiColor color, this.alt) :
-    super(value, color) {
+  _ColorShellStringWithAlt(String value, AnsiColor color, this.alt)
+      : super(value, color) {
     assert(alt != null);
   }
 
@@ -92,7 +93,7 @@ class _ColorShellStringWithAlt extends _ColorShellString {
 class _ListShellString extends ShellString {
   final List<Object> values;
 
-  _ListShellString(this.values): super._internal();
+  _ListShellString(this.values) : super._internal();
 
   @override
   String format(bool useColor) {

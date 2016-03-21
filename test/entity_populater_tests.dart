@@ -6,64 +6,74 @@ import 'package:unittest/unittest.dart';
 import 'package:path/path.dart' as pathos;
 import 'package:bot_io/bot_io.dart';
 
-const _entityTypes = const [null, FileSystemEntityType.FILE,
-    FileSystemEntityType.DIRECTORY, FileSystemEntityType.LINK];
+const _entityTypes = const [
+  null,
+  FileSystemEntityType.FILE,
+  FileSystemEntityType.DIRECTORY,
+  FileSystemEntityType.LINK
+];
 
 const _dirMap = const {
   'file.txt': 'content text',
   'file2.txt': 'content 2 text',
-  'dir1': const {
-    'subfile': 'subFileContent',
-    'emptySubSubDir': const {}
-  },
+  'dir1': const {'subfile': 'subFileContent', 'emptySubSubDir': const {}},
   'emptySubDir': const {}
 };
 
 void main() {
-  _registerEntityPopulaterTestsImpl(FileSystemEntityType.FILE,
-      'String', 'test string content');
+  _registerEntityPopulaterTestsImpl(
+      FileSystemEntityType.FILE, 'String', 'test string content');
 
-  _registerEntityPopulaterTestsImpl(FileSystemEntityType.DIRECTORY,
-      'Map', _dirMap);
+  _registerEntityPopulaterTestsImpl(
+      FileSystemEntityType.DIRECTORY, 'Map', _dirMap);
 }
 
-void _registerEntityPopulaterTestsImpl(FileSystemEntityType type,
-                                       String contentDescription,
-                                       dynamic testContent) {
-
+void _registerEntityPopulaterTestsImpl(
+    FileSystemEntityType type, String contentDescription, dynamic testContent) {
   group('$type from $contentDescription', () {
-
     [true, false].forEach((bool parentDirExists) {
       _entityTypes.forEach((FileSystemEntityType existingEntity) {
         [true, false].forEach((bool createParent) {
           [true, false].forEach((bool overwriteExisting) {
-
             final success = (createParent || parentDirExists) &&
                 (overwriteExisting || existingEntity == null);
 
             final resultStr = success ? 'succeed' : 'fail';
 
-            if(!parentDirExists) {
-              if(existingEntity == null) {
+            if (!parentDirExists) {
+              if (existingEntity == null) {
                 // ignore existingEntity
-                test('no parent dir; create parent: $createParent; '
+                test(
+                    'no parent dir; create parent: $createParent; '
                     'overwrite existing: $overwriteExisting; '
                     'will $resultStr', () {
-                  return _testEntityPopulator(type, testContent,
-                      createParent, overwriteExisting,
-                      parentDirExists, existingEntity, success);
+                  return _testEntityPopulator(
+                      type,
+                      testContent,
+                      createParent,
+                      overwriteExisting,
+                      parentDirExists,
+                      existingEntity,
+                      success);
                 });
               }
             } else {
-              var existingString = (existingEntity == null) ?
-                  'no existing entity' : 'existing $existingEntity';
-              test('parent exists; $existingString; '
+              var existingString = (existingEntity == null)
+                  ? 'no existing entity'
+                  : 'existing $existingEntity';
+              test(
+                  'parent exists; $existingString; '
                   'create parent: $createParent; '
                   'overwrite existing: $overwriteExisting; '
                   'will $resultStr', () {
-                return _testEntityPopulator(type, testContent,
-                    createParent, overwriteExisting,
-                    parentDirExists, existingEntity, success);
+                return _testEntityPopulator(
+                    type,
+                    testContent,
+                    createParent,
+                    overwriteExisting,
+                    parentDirExists,
+                    existingEntity,
+                    success);
               });
             }
           });
@@ -73,18 +83,20 @@ void _registerEntityPopulaterTestsImpl(FileSystemEntityType type,
   });
 }
 
-Future _testEntityPopulator(FileSystemEntityType entityType,
-                            dynamic entityContent, bool createParent,
-                            bool overwriteExisting, bool parentDirExists,
-                            FileSystemEntityType existingEntityType,
-                            bool expectedSuccess) {
-
+Future _testEntityPopulator(
+    FileSystemEntityType entityType,
+    dynamic entityContent,
+    bool createParent,
+    bool overwriteExisting,
+    bool parentDirExists,
+    FileSystemEntityType existingEntityType,
+    bool expectedSuccess) {
   const entityName = 'targetEntityName';
 
   assert(parentDirExists == true || existingEntityType == null);
 
-  final entityRelativePath = parentDirExists ?
-      entityName : pathos.join('parentDir', entityName);
+  final entityRelativePath =
+      parentDirExists ? entityName : pathos.join('parentDir', entityName);
 
   return TempDir.then((dir) {
     var absolutePath = pathos.join(dir.path, entityRelativePath);
@@ -101,36 +113,32 @@ Future _testEntityPopulator(FileSystemEntityType entityType,
           case FileSystemEntityType.LINK:
             var linkToFilePath = absolutePath + '.content';
             var linkToFile = new File(linkToFilePath);
-            return linkToFile.writeAsString('link to file content')
+            return linkToFile
+                .writeAsString('link to file content')
                 .then((File ltf) {
-                  var link = new Link(absolutePath);
-                  return link.create(linkToFilePath);
-                });
+              var link = new Link(absolutePath);
+              return link.create(linkToFilePath);
+            });
           default:
             throw 'not impled yet: existing entity $existingEntityType';
         }
       }
-    })
-    .then((_) {
+    }).then((_) {
       return EntityPopulater.populate(absolutePath, entityContent,
           createParentDirectories: createParent,
           overwriteExisting: overwriteExisting);
-    })
-    .then((FileSystemEntity entity) {
+    }).then((FileSystemEntity entity) {
       expect(entity.path, equals(absolutePath));
       expect(FileSystemEntity.typeSync(entity.path, followLinks: false),
           entityType);
 
-      return EntityValidator.validate(entity, entityContent)
-          .isEmpty;
-    })
-    .catchError((error) {
+      return EntityValidator.validate(entity, entityContent).isEmpty;
+    }).catchError((error) {
       assert(error is EntityPopulatorException);
       return false;
     }, test: (error) {
       return error is EntityPopulatorException;
-    })
-    .then((bool isSuccess) {
+    }).then((bool isSuccess) {
       expect(isSuccess, expectedSuccess);
     });
   });

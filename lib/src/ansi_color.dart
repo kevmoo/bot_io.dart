@@ -26,11 +26,11 @@ class AnsiColor {
 
   /// Returns `true` if the current platform is not Windows and if the type
   /// of [stdout] is [StdioType.TERMINAL].
-  static final bool isSupported = !Platform.isWindows &&
-      stdioType(stdout) == StdioType.TERMINAL;
+  static final bool isSupported =
+      !Platform.isWindows && stdioType(stdout) == StdioType.TERMINAL;
 
-  const AnsiColor._(this.foregroundId, this.name, {int srg: 0}) :
-    this._srg = srg;
+  const AnsiColor._(this.foregroundId, this.name, {int srg: 0})
+      : this._srg = srg;
 
   AnsiColor asBold() {
     if (isBold) {

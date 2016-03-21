@@ -11,35 +11,33 @@ import 'package:path/path.dart' as p;
 import 'sha_and_comparison.dart';
 
 abstract class EntityValidator {
-
-  static Stream<String> validateFileStringContent(File entity,
-      String targetContent) {
+  static Stream<String> validateFileStringContent(
+      File entity, String targetContent) {
     return validateFileContentSha(entity, _getStringSha1(targetContent));
   }
 
-  static Stream<String> validateFileContentSha(FileSystemEntity entity,
-      String targetSha) {
-    if(entity is! File) {
+  static Stream<String> validateFileContentSha(
+      FileSystemEntity entity, String targetSha) {
+    if (entity is! File) {
       return new Stream.fromIterable(['entity is not a File']);
     }
     assert(targetSha != null);
     assert(targetSha.length == 40);
 
-    var future = fileSha1Hex(entity)
-        .then((String sha1) {
-          if(sha1 == targetSha) {
-            return null;
-          } else {
-            return 'content does not match: $entity';
-          }
-        });
+    var future = fileSha1Hex(entity).then((String sha1) {
+      if (sha1 == targetSha) {
+        return null;
+      } else {
+        return 'content does not match: $entity';
+      }
+    });
 
     return _oneOrNoneOnNull(future);
   }
 
-  static Stream<String> validateDirectoryFromMap(FileSystemEntity entity,
-      Map<String, dynamic> map) {
-    if(entity is! Directory) {
+  static Stream<String> validateDirectoryFromMap(
+      FileSystemEntity entity, Map<String, dynamic> map) {
+    if (entity is! Directory) {
       return new Stream.fromIterable(['entity is not a Directory']);
     }
 
@@ -48,7 +46,6 @@ abstract class EntityValidator {
     final expectedItems = new Set.from(map.keys);
 
     return expandStream(dir.list(), (FileSystemEntity item) {
-
       final relative = p.relative(item.path, from: entity.path);
 
       final expected = expectedItems.remove(relative);
@@ -57,7 +54,6 @@ abstract class EntityValidator {
       } else {
         return new Stream.fromIterable(['Not expected: $item']);
       }
-
     }, onDone: () {
       return new Stream.fromIterable(expectedItems.map((item) {
         return 'Missing item $item';
@@ -97,14 +93,13 @@ class EntityExistsValidator implements EntityValidator {
     assert(entity != null);
 
     final entType = _getType(entity);
-    if(entityType == null || entityType == entType) {
-      return _exists(entity)
-          .then((bool exists) {
-            if(exists) {
-              return null;
-            }
-            return "$entity does not exist on disk";
-          });
+    if (entityType == null || entityType == entType) {
+      return _exists(entity).then((bool exists) {
+        if (exists) {
+          return null;
+        }
+        return "$entity does not exist on disk";
+      });
     }
 
     return new Future.value(
@@ -135,8 +130,8 @@ class EntityExistsValidator implements EntityValidator {
   }
 }
 
-Stream _oneOrNoneOnNull(Future future) => new Stream.fromFuture(future)
-    .where((e) => e != null);
+Stream _oneOrNoneOnNull(Future future) =>
+    new Stream.fromFuture(future).where((e) => e != null);
 
 String _getStringSha1(String content) {
   final bytes = UTF8.encode(content);

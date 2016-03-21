@@ -26,22 +26,21 @@ class TempDir {
   static Future then(Future func(Directory dir)) {
     TempDir tmpDir;
 
-    return TempDir.create()
-        .then((value) {
-          tmpDir = value;
+    return TempDir.create().then((value) {
+      tmpDir = value;
 
-          return func(tmpDir.dir);
-        })
-        .whenComplete(() {
-          if(tmpDir != null) {
-            return tmpDir.dispose();
-          }
-        });
+      return func(tmpDir.dir);
+    }).whenComplete(() {
+      if (tmpDir != null) {
+        return tmpDir.dispose();
+      }
+    });
   }
 
   // TODO: ponder added optional 'template' param here
   static Future<TempDir> create() {
-    return Directory.systemTemp.createTemp()
+    return Directory.systemTemp
+        .createTemp()
         .then((newDir) => new TempDir._internal(newDir));
   }
 
@@ -56,14 +55,15 @@ class TempDir {
   bool get isDisposed => _disposed;
 
   Future<TempDir> populate(source) {
-    return EntityPopulater.populate(path, source,
-        createParentDirectories: false,
-        overwriteExisting: false,
-        leaveExistingDirs: true)
+    return EntityPopulater
+        .populate(path, source,
+            createParentDirectories: false,
+            overwriteExisting: false,
+            leaveExistingDirs: true)
         .then((Directory outputDir) {
-          assert(path == outputDir.path);
-          return this;
-        });
+      assert(path == outputDir.path);
+      return this;
+    });
   }
 
   Future<bool> verifyContents(Map<String, dynamic> content) {
@@ -77,13 +77,14 @@ class TempDir {
   String toString() => "TempDir: $path";
 
   Future dispose() {
-    require(_disposed == false, 'Already disposed ore in the process of being'
+    require(
+        _disposed == false,
+        'Already disposed ore in the process of being'
         ' disposed.');
     _disposed = null;
-    return dir.delete(recursive: true)
-        .then((_) {
-          _disposed = true;
-          return null;
-        });
+    return dir.delete(recursive: true).then((_) {
+      _disposed = true;
+      return null;
+    });
   }
 }

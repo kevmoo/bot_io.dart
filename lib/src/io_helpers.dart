@@ -9,17 +9,15 @@ import 'package:path/path.dart' as p;
 import 'entity_validator.dart';
 
 class IoHelpers {
-  static Future<bool> verifyContents(Directory dir,
-      Map<String, dynamic> content) {
-    return dir.exists()
-        .then((bool doesExist) {
-          if(!doesExist) {
-            return false;
-          } else {
-            return EntityValidator.validateDirectoryFromMap(dir, content)
-                .isEmpty;
-          }
-        });
+  static Future<bool> verifyContents(
+      Directory dir, Map<String, dynamic> content) {
+    return dir.exists().then((bool doesExist) {
+      if (!doesExist) {
+        return false;
+      } else {
+        return EntityValidator.validateDirectoryFromMap(dir, content).isEmpty;
+      }
+    });
   }
 
   static Future<bool> isEmpty(Directory dir) {
@@ -43,8 +41,8 @@ Future copyDirectory(String sourceDirectory, String targetDir) {
 
 // TODO(kevmoo) document
 dynamic _copyItem(FileSystemEntity fse, String source, String target) {
-  if(fse is Directory) return null;
-  if(fse is Link) {
+  if (fse is Directory) return null;
+  if (fse is Link) {
     throw new ArgumentError('Cannot rock on the link at ${fse.path}');
   }
 
@@ -68,6 +66,5 @@ void _requireEmptyDir(String path, String argName) {
 
   var dir = new Directory(path);
 
-  requireArgument(dir.listSync().isEmpty, argName,
-      '$path is not empty.');
+  requireArgument(dir.listSync().isEmpty, argName, '$path is not empty.');
 }

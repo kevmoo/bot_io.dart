@@ -13,7 +13,6 @@ import 'package:path/path.dart' as p;
  */
 void enableScriptLogListener() {
   if (_scriptLogListenerPath == null) {
-
     final script = Platform.script.toFilePath();
     _scriptLogListenerPath = p.absolute(script) + '.log';
 
@@ -31,8 +30,8 @@ void enableScriptLogListener() {
 String _scriptLogListenerPath;
 
 void _doLog(logging.LogRecord record) {
-
-  var msg = '${record.time}\t${record.level}\t${record.loggerName}\t${record.message}';
+  var msg =
+      '${record.time}\t${record.level}\t${record.loggerName}\t${record.message}';
 
   var logFile = new File(_scriptLogListenerPath);
 

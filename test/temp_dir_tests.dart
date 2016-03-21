@@ -1,48 +1,35 @@
 library test.bot_io.temp_dir;
 
-
 import 'dart:async';
 import 'dart:io';
 import 'package:unittest/unittest.dart';
 import 'package:bot_io/bot_io.dart';
 
-
-
 final _map = {
   'file1.txt': 'content',
   'file2.txt': 'content2',
   'empty dir': {},
-  'dir1': {
-    'dir1_file1.txt': 'and content some more'
-  }
+  'dir1': {'dir1_file1.txt': 'and content some more'}
 };
 
 final _mapFewer = {
   'file1.txt': 'content',
   'empty dir': {},
-  'dir1': {
-    'dir1_file1.txt': 'and content some more'
-  }
+  'dir1': {'dir1_file1.txt': 'and content some more'}
 };
 
 final _mapMore = {
   'file1.txt': 'content',
   'file2.txt': 'content2',
-  'empty dir': {
-    'file3.txt': 'content3'
-  },
-  'dir1': {
-    'dir1_file1.txt': 'and content some more'
-  }
+  'empty dir': {'file3.txt': 'content3'},
+  'dir1': {'dir1_file1.txt': 'and content some more'}
 };
 
 final _mapDiff = {
   'file1.txt': 'content_',
   'file2.txt': 'content2',
   'empty dir': {},
-  'dir1': {
-    'dir1_file1.txt': 'and content some more'
-  }
+  'dir1': {'dir1_file1.txt': 'and content some more'}
 };
 
 void main() {
@@ -54,31 +41,31 @@ void main() {
 
   test('empty to empty', () => _testTempDirPopulate({}, {}, true));
 
-  test('one file to one file', () => _testTempDirPopulate(
-      {'a.txt': 'a'}, {'a.txt': 'a'}, true));
+  test('one file to one file',
+      () => _testTempDirPopulate({'a.txt': 'a'}, {'a.txt': 'a'}, true));
 
-  test('same name, different content', () => _testTempDirPopulate(
-      {'a.txt': 'a'}, {'a.txt': 'b'}, false));
+  test('same name, different content',
+      () => _testTempDirPopulate({'a.txt': 'a'}, {'a.txt': 'b'}, false));
 
-  test('diff name, same content', () => _testTempDirPopulate(
-      {'a.txt': 'a'}, {'b.txt': 'a'}, false));
+  test('diff name, same content',
+      () => _testTempDirPopulate({'a.txt': 'a'}, {'b.txt': 'a'}, false));
 
   group('entity exists', () {
-
     // TODO: test links
 
     final dummyValues = new Map<FileSystemEntityType, dynamic>();
     dummyValues[FileSystemEntityType.FILE] = 'file contents';
     dummyValues[FileSystemEntityType.DIRECTORY] = {'dirfile.txt': 'txt'};
 
-    const entityTypes = const [FileSystemEntityType.DIRECTORY,
-                               FileSystemEntityType.FILE,
-                               FileSystemEntityType.LINK,
-                               null];
+    const entityTypes = const [
+      FileSystemEntityType.DIRECTORY,
+      FileSystemEntityType.FILE,
+      FileSystemEntityType.LINK,
+      null
+    ];
 
     dummyValues.forEach((type, value) {
       entityTypes.forEach((testType) {
-
         String testTypeStr = testType == null ? 'entity' : testType.toString();
 
         test('$type is $testTypeStr', () {
@@ -88,41 +75,32 @@ void main() {
           final testMap = new Map();
           testMap['entity'] = new EntityExistsValidator(testType);
 
-          return _testTempDirPopulate(createMap, testMap,
-              testType == null || testType == type);
+          return _testTempDirPopulate(
+              createMap, testMap, testType == null || testType == type);
         });
-
       });
-
     });
-
   });
 }
 
 Future _testTempDirPopulate(Map source, Map target, bool shouldWork) {
-
   TempDir tempDir = null;
 
+  return TempDir.create().then((TempDir td) {
+    assert(tempDir == null);
+    tempDir = td;
 
-  return TempDir.create()
-      .then((TempDir td) {
-        assert(tempDir == null);
-        tempDir = td;
-
-        return tempDir.populate(source);
-      })
-      .then((TempDir value) {
-        expect(value, equals(tempDir));
-        return tempDir.verifyContents(target);
-      })
-      .then((bool expectTrue) {
-        expect(expectTrue, shouldWork, reason: 'should match the provided map');
-      })
-      .then((_) {
-        return tempDir.dispose();
-      })
-      .then((_) {
-        expect(tempDir.dir.existsSync(), isFalse, reason: 'Temp dir should be deleted');
-        tempDir = null;
-      });
+    return tempDir.populate(source);
+  }).then((TempDir value) {
+    expect(value, equals(tempDir));
+    return tempDir.verifyContents(target);
+  }).then((bool expectTrue) {
+    expect(expectTrue, shouldWork, reason: 'should match the provided map');
+  }).then((_) {
+    return tempDir.dispose();
+  }).then((_) {
+    expect(tempDir.dir.existsSync(), isFalse,
+        reason: 'Temp dir should be deleted');
+    tempDir = null;
+  });
 }

@@ -6,19 +6,19 @@ import 'package:bot/bot.dart';
 import 'ansi_color.dart';
 
 class Console {
-
   /// **DEPRECATED**
   ///
   /// Use [AnsiColor.isSupported] instead.
   @deprecated
   static bool get supportsColor => AnsiColor.isSupported;
 
-  static Iterable<String> getTable(Iterable source,
-      List<ColumnDefinition> columns, {bool includeHeader: false}) {
+  static Iterable<String> getTable(
+      Iterable source, List<ColumnDefinition> columns,
+      {bool includeHeader: false}) {
     requireArgumentNotNull(source, 'source');
     requireArgumentNotNull(columns, 'columns');
-    requireArgument(columns.length > 0, 'columns',
-        'Must have at least one column');
+    requireArgument(
+        columns.length > 0, 'columns', 'Must have at least one column');
 
     //
     // populate cells so we know what data we're dealing with
@@ -27,7 +27,8 @@ class Console {
 
     final headerInclude = includeHeader ? 1 : 0;
 
-    final cells = new Array2d<String>(columns.length, source.length + headerInclude);
+    final cells =
+        new Array2d<String>(columns.length, source.length + headerInclude);
     final maxWidths = new List<int>.filled(columns.length, 0);
 
     if (includeHeader) {

@@ -6,28 +6,19 @@ import 'package:path/path.dart' as pathos;
 import 'package:bot_io/bot_io.dart';
 
 void main() {
-
-  var m1 = {
-    'foo': 'foo',
-    'bar': 'foo',
-    'sub': 'not a dir'
-  };
+  var m1 = {'foo': 'foo', 'bar': 'foo', 'sub': 'not a dir'};
 
   var m2 = {
     'bar': 'bar',
     'baz': 'baz',
-    'sub': {
-      'sub': 'sub'
-    }
+    'sub': {'sub': 'sub'}
   };
 
   var m3 = {
     'foo': 'foo',
     'bar': 'bar',
     'baz': 'baz',
-    'sub': {
-      'sub': 'sub'
-    }
+    'sub': {'sub': 'sub'}
   };
 
   test("merge map internal", () {
@@ -38,7 +29,6 @@ void main() {
     var merge = _mergeMaps(m1, m2);
 
     expect(merge, equals(m3));
-
   });
 
   test('updateDirectory', () {
@@ -46,48 +36,37 @@ void main() {
   });
 }
 
-Future _testUpdateDirectory(dynamic originalContent, dynamic updateContent,
-                            dynamic verifyContent) {
-
+Future _testUpdateDirectory(
+    dynamic originalContent, dynamic updateContent, dynamic verifyContent) {
   TempDir tempDir;
 
-  return TempDir.create()
-      .then((TempDir value) {
-        tempDir = value;
+  return TempDir.create().then((TempDir value) {
+    tempDir = value;
 
-        return EntityPopulater.populate(tempDir.path, originalContent,
-            overwriteExisting: true);
-      })
-      .then((_) {
-        return tempDir.verifyContents(originalContent);
-      })
-      .then((bool isMatch) {
-        expect(isMatch, isTrue);
+    return EntityPopulater.populate(tempDir.path, originalContent,
+        overwriteExisting: true);
+  }).then((_) {
+    return tempDir.verifyContents(originalContent);
+  }).then((bool isMatch) {
+    expect(isMatch, isTrue);
 
-        var nonPath = pathos.join(tempDir.path, 'no_here');
+    var nonPath = pathos.join(tempDir.path, 'no_here');
 
-        return EntityPopulater.updateDirectory(nonPath, updateContent);
-      })
-      .catchError((error) {
-        expect(error is EntityPopulatorException, isTrue,
-            reason: 'should throw error for non existant dir');
-      })
-      .then((_) {
-
-        return EntityPopulater.updateDirectory(tempDir.path, updateContent);
-      })
-      .then((_) {
-
-        return tempDir.verifyContents(verifyContent);
-      })
-      .then((bool isMatch) {
-        expect(isMatch, isTrue);
-      })
-      .whenComplete(() {
-        if(tempDir != null) {
-          return tempDir.dispose();
-        }
-      });
+    return EntityPopulater.updateDirectory(nonPath, updateContent);
+  }).catchError((error) {
+    expect(error is EntityPopulatorException, isTrue,
+        reason: 'should throw error for non existant dir');
+  }).then((_) {
+    return EntityPopulater.updateDirectory(tempDir.path, updateContent);
+  }).then((_) {
+    return tempDir.verifyContents(verifyContent);
+  }).then((bool isMatch) {
+    expect(isMatch, isTrue);
+  }).whenComplete(() {
+    if (tempDir != null) {
+      return tempDir.dispose();
+    }
+  });
 }
 
 /**
