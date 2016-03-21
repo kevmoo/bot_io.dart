@@ -1,6 +1,5 @@
-## 0.26.3+1
+## 0.26.4
 
-* Updated `hop` and added `hop_unittest` dev dependencies.
 * Removed link to GitHub docs.
 * Code formatting.
 
