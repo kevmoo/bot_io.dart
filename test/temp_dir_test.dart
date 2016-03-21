@@ -2,7 +2,7 @@ library test.bot_io.temp_dir;
 
 import 'dart:async';
 import 'dart:io';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'package:bot_io/bot_io.dart';
 
 final _map = {

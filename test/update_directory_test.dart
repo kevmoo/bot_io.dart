@@ -1,7 +1,7 @@
 library test.bot_io.update_directory;
 
 import 'dart:async';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'package:path/path.dart' as pathos;
 import 'package:bot_io/bot_io.dart';
 
