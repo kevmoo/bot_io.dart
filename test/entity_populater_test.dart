@@ -2,9 +2,10 @@ library test.bot_io.entity_populater;
 
 import 'dart:async';
 import 'dart:io';
-import 'package:test/test.dart';
-import 'package:path/path.dart' as pathos;
+
 import 'package:bot_io/bot_io.dart';
+import 'package:path/path.dart' as pathos;
+import 'package:test/test.dart';
 
 const _entityTypes = const [
   null,

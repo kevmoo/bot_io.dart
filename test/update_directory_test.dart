@@ -1,9 +1,10 @@
 library test.bot_io.update_directory;
 
 import 'dart:async';
-import 'package:test/test.dart';
-import 'package:path/path.dart' as pathos;
+
 import 'package:bot_io/bot_io.dart';
+import 'package:path/path.dart' as pathos;
+import 'package:test/test.dart';
 
 void main() {
   var m1 = {'foo': 'foo', 'bar': 'foo', 'sub': 'not a dir'};

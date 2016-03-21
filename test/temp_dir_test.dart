@@ -2,8 +2,9 @@ library test.bot_io.temp_dir;
 
 import 'dart:async';
 import 'dart:io';
-import 'package:test/test.dart';
+
 import 'package:bot_io/bot_io.dart';
+import 'package:test/test.dart';
 
 final _map = {
   'file1.txt': 'content',

@@ -1,6 +1,7 @@
 library bot_io.console;
 
 import 'dart:math' as math;
+
 import 'package:bot/bot.dart';
 
 import 'ansi_color.dart';
