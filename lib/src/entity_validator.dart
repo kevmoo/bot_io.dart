@@ -144,8 +144,6 @@ Stream _oneOrNoneOnNull(Future future) =>
 
 String _getStringSha1(String content) {
   final bytes = UTF8.encode(content);
-  final sha = new crypto.SHA1();
-  sha.add(bytes);
-  final sha1Bytes = sha.close();
-  return crypto.CryptoUtils.bytesToHex(sha1Bytes);
+  final sha = crypto.sha1.convert(bytes);
+  return sha.toString();
 }

@@ -3,6 +3,7 @@ library bot_io.sha_and_comparison;
 import 'dart:async';
 import 'dart:io';
 
+import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart';
 
 /**
@@ -20,18 +21,14 @@ Future<bool> fileContentsMatch(File file1, File file2) {
   });
 }
 
-/**
- * Returns the 40-character hex SHA1 value of the provided file.
- *
- * If [file] is null or does not exist, errors will occur.
- */
-Future<String> fileSha1Hex(File file) =>
-    _getFileSha1(file).then(CryptoUtils.bytesToHex);
+Future<String> fileSha1Hex(File source) async {
+  var sink = new AccumulatorSink<Digest>();
 
-Future<List<int>> _getFileSha1(File source) {
-  var sha1 = new SHA1();
+  var digestSync = sha1.startChunkedConversion(sink);
 
-  return source.openRead().forEach((list) {
-    sha1.add(list);
-  }).then((_) => sha1.close());
+  await source.openRead().forEach(digestSync.add);
+
+  digestSync.close();
+
+  return sink.events.single.toString();
 }

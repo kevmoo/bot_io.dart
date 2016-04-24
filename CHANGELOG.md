@@ -1,3 +1,9 @@
+## 0.26.5-dev
+
+* Deprecated a number of classes.
+
+* Support the latest version of `pkg/crypto`.
+
 ## 0.26.4
 
 * Removed link to GitHub docs.
