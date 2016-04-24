@@ -1,0 +1,9 @@
+language: dart
+sudo: false
+dart:
+  - stable
+  - dev
+cache:
+  directories:
+    - $HOME/.pub-cache
+script: ./tool/travis.sh
