@@ -1,8 +1,6 @@
-![BOT!](https://raw.github.com/kevmoo/bot.dart/master/resource/logo.png)
-# bot_io
-### A collection of Dart file system helpers built on dart:io.
+# DEPRECATED. Not maintained.
 
-[![Build Status](https://drone.io/github.com/kevmoo/bot_io.dart/status.png)](https://drone.io/github.com/kevmoo/bot_io.dart/latest)
+### A collection of Dart file system helpers built on dart:io.
 
 # Projects using bot_io
 

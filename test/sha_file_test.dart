@@ -15,7 +15,7 @@ const _fileSha = 'fd892cd21587480cfe85147e04e29a7d774bc968';
 const _fileContents = 'my pretty wife Shanna';
 
 Future _sha1Fun() {
-  TempDir tempDir = null;
+  TempDir tempDir;
 
   File file1;
 

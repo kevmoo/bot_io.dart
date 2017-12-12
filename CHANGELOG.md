@@ -1,3 +1,9 @@
+## 0.26.4+1
+
+* Updated dependencies - mostly to fix users of `hop`.
+
+* Marked the package as deprecated.
+
 ## 0.26.4
 
 * Removed link to GitHub docs.

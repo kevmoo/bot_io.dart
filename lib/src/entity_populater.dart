@@ -12,7 +12,7 @@ abstract class EntityPopulater {
       bool overwriteExisting: false,
       bool leaveExistingDirs: false}) {
     if (source is String) {
-      var stringStream = new Stream.fromIterable([source]);
+      var stringStream = new Stream<String>.fromIterable([source]);
       source = UTF8.encoder.bind(stringStream);
     } else if (source is File) {
       source = source.openRead();

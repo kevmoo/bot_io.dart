@@ -3,6 +3,7 @@ library bot_io.sha_and_comparison;
 import 'dart:async';
 import 'dart:io';
 
+import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart';
 
 /**
@@ -25,13 +26,20 @@ Future<bool> fileContentsMatch(File file1, File file2) {
  *
  * If [file] is null or does not exist, errors will occur.
  */
-Future<String> fileSha1Hex(File file) =>
-    _getFileSha1(file).then(CryptoUtils.bytesToHex);
+Future<String> fileSha1Hex(File file) => _getFileSha1(file).then(hex.encode);
 
-Future<List<int>> _getFileSha1(File source) {
-  var sha1 = new SHA1();
+Future<List<int>> _getFileSha1(File source) async {
+  var controller = new StreamController<Digest>();
 
-  return source.openRead().forEach((list) {
-    sha1.add(list);
-  }).then((_) => sha1.close());
+  var sink = sha1.startChunkedConversion(controller.sink);
+
+  await for (var list in source.openRead()) {
+    sink.add(list);
+  }
+
+  sink.close();
+
+  var digest = await controller.stream.single;
+
+  return digest.bytes;
 }

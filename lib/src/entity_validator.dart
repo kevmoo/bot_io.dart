@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bot/bot.dart';
+import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:path/path.dart' as p;
 
@@ -135,8 +136,6 @@ Stream _oneOrNoneOnNull(Future future) =>
 
 String _getStringSha1(String content) {
   final bytes = UTF8.encode(content);
-  final sha = new crypto.SHA1();
-  sha.add(bytes);
-  final sha1Bytes = sha.close();
-  return crypto.CryptoUtils.bytesToHex(sha1Bytes);
+  var digest = crypto.sha1.convert(bytes);
+  return hex.encode(digest.bytes);
 }
